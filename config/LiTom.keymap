@@ -1,0 +1,27 @@
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/outputs.h>
+#include <dt-bindings/zmk/pointing.h>
+#include <zephyr/dt-bindings/input/input-event-codes.h>
+#include <input/processors/runtime-input-processor.dtsi>
+#include <behaviors/runtime-sensor-rotate.dtsi>
+
+#undef ZMK_POINTING_DEFAULT_SCRL_VAL
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 80
+
+/ {
+    keymap: keymap {
+        compatible = "zmk,keymap";
+    };
+};
+
+#include "keymap/macros.dtsi"
+#include "keymap/sensors.dtsi"
+#include "keymap/layers/default.dtsi"
+#include "keymap/layers/mouse.dtsi"
+#include "keymap/layers/scroll.dtsi"
+#include "keymap/layers/arrow.dtsi"
+#include "keymap/layers/num.dtsi"
+#include "keymap/layers/function.dtsi"
+#include "keymap/layers/bluetooth.dtsi"

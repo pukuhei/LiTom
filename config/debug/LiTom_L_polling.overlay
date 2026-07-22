@@ -1,0 +1,4 @@
+&kscan0 {
+    /delete-property/ interrupt-gpios;
+    poll-period-ms = <10>;
+};

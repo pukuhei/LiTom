@@ -1,0 +1,21 @@
+/ {
+    behaviors {
+        scroll_up_down: behavior_sensor_rotate_mouse_wheel_up_down {
+            compatible = "zmk,behavior-runtime-sensor-rotate";
+            label = "ENCODER_MSC_DOWN_UP";
+            #sensor-binding-cells = <0>;
+            cw-binding = <&msc SCRL_DOWN>;
+            ccw-binding = <&msc SCRL_UP>;
+            tap-ms = <20>;
+        };
+
+        tab_slide: behavior_sensor_rotate_tab_slide {
+            compatible = "zmk,behavior-runtime-sensor-rotate";
+            label = "ENCODER_TAB_SLIDE";
+            #sensor-binding-cells = <0>;
+            cw-binding = <&kp LA(LG(RIGHT_ARROW))>;
+            ccw-binding = <&kp LA(LG(LEFT_ARROW))>;
+            tap-ms = <20>;
+        };
+    };
+};

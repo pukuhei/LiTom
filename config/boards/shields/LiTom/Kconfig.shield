@@ -1,0 +1,5 @@
+config SHIELD_LITOM_R
+    def_bool $(shields_list_contains,LiTom_R)
+
+config SHIELD_LITOM_L
+    def_bool $(shields_list_contains,LiTom_L)

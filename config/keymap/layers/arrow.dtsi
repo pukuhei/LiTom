@@ -1,0 +1,17 @@
+&keymap {
+    ARROW {
+        bindings = <
+&trans                                                                                                                                                                                 &trans
+&kp GRAVE  &kp LC(LS(TAB))         &kp LG(RIGHT)   &kp NUMBER_9             &kp NUMBER_0       &oled_mode      &trans  &trans  &kp RC(LEFT_ARROW)  &kp UP_ARROW      &kp RC(RIGHT_ARROW)  &kp LG(P)
+&kp TAB    &kp LA(LG(LEFT_ARROW))  &kp LG(LEFT)    &kp LG(LA(RIGHT_ARROW))  &kp LEFT_BRACKET   &trans      &trans  &trans  &kp LEFT_ARROW      &kp DOWN_ARROW    &kp RIGHT_ARROW      &kp LG(K)
+&kp LCMD   &kp LG(LS(LEFT_ARROW))  &trans          &kp LG(LS(RIGHT_ARROW))  &kp RIGHT_BRACKET  &trans      &trans  &trans  &trans              &kp LC(UP_ARROW)  &trans               &kp LG(L)
+&trans     &trans                  &trans          &trans                   &trans             &trans      &trans  &trans                                         &trans               &trans
+        >;
+
+        sensor-bindings = <
+            &tab_slide
+            &scroll_up_down
+            &scroll_up_down
+        >;
+    };
+};

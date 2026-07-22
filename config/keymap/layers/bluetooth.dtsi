@@ -1,0 +1,17 @@
+&keymap {
+    BT {
+        bindings = <
+&trans                                                                                                                                      &trans
+&kp LG(Q)      &kp LC(W)  &out OUT_USB  &out OUT_BLE  &out OUT_TOG  &trans      &trans  &bt BT_PRV  &bt BT_NXT  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4
+&kp LG(LS(Z))  &trans     &kp LC(C)  &trans     &trans  &trans      &trans  &trans      &trans      &trans        &trans        &trans
+&kp LG(Z)      &kp LG(X)  &kp LG(C)  &kp LG(V)  &trans  &trans      &trans  &trans      &trans      &trans        &trans        &trans
+&studio_unlock &trans     &trans     &trans     &trans  &trans      &trans  &trans                                &trans        &trans
+        >;
+
+        sensor-bindings = <
+            &tab_slide
+            &scroll_up_down
+            &scroll_up_down
+        >;
+    };
+};

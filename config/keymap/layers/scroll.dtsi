@@ -1,0 +1,17 @@
+&keymap {
+    SCROLL {
+        bindings = <
+&trans                                                                                          &trans
+&kp ESCAPE  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+&trans      &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+&kp F12     &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+&kp F12     &trans  &trans  &trans  &trans  &trans      &trans  &trans                  &trans  &trans
+        >;
+
+        sensor-bindings = <
+            &tab_slide
+            &scroll_up_down
+            &scroll_up_down
+        >;
+    };
+};

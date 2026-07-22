@@ -1,0 +1,55 @@
+config LITOM_PREFER_USB_ENDPOINT_ON_READY
+    bool "Prefer USB endpoint when USB HID is ready"
+    depends on ZMK_USB && ZMK_BLE
+    help
+      Switch the selected ZMK output endpoint back to USB whenever the USB HID
+      endpoint becomes ready. This keeps BLE enabled for split transport while
+      making host input prefer USB when a cable is connected.
+
+config LITOM_AUTO_MOUSE_LAYER
+    bool "LiTom trackball auto mouse layer"
+    depends on INPUT
+    help
+      Activate a temporary mouse layer from trackball movement without using
+      the generic temp-layer input processor.
+
+if LITOM_AUTO_MOUSE_LAYER
+
+config LITOM_AUTO_MOUSE_LAYER_TARGET
+    int "Auto mouse layer index"
+    default 1
+
+config LITOM_AUTO_MOUSE_LAYER_SCROLL
+    int "Scroll layer index that pauses auto mouse layer deactivation"
+    default 2
+
+config LITOM_AUTO_MOUSE_LAYER_TIMEOUT_MS
+    int "Auto mouse layer timeout in milliseconds"
+    default 400
+
+module = LITOM_AUTO_MOUSE_LAYER
+module-str = litom_auto_mouse_layer
+source "${ZEPHYR_BASE}/subsys/logging/Kconfig.template.log_config"
+
+endif
+
+menuconfig LITOM_IQS7222D_TEST
+    bool "IQS7222D touchpad test input driver"
+    depends on I2C && GPIO && INPUT
+    depends on DT_HAS_AZOTEQ_IQS7222D_TEST_ENABLED
+    help
+      Enable a lightweight IQS7222D test driver for bring-up. It verifies I2C
+      communication, logs product/status data, and emits horizontal relative
+      input from the reported trackpad X coordinate when configured.
+
+if LITOM_IQS7222D_TEST
+
+config LITOM_IQS7222D_TEST_INIT_PRIORITY
+    int "IQS7222D test driver init priority"
+    default INPUT_INIT_PRIORITY
+
+module = LITOM_IQS7222D_TEST
+module-str = litom_iqs7222d_test
+source "${ZEPHYR_BASE}/subsys/logging/Kconfig.template.log_config"
+
+endif

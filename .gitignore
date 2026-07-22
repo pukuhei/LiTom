@@ -1,0 +1,14 @@
+**/.DS_Store
+.claude/
+.build/
+**/__pycache__/
+*.pyc
+checks/freerouting_classes/
+**/fp-info-cache
+*.kicad_prl
+zmk
+zmk-dongle-display
+zmk-pmw3610-driver
+modules
+.west
+build/

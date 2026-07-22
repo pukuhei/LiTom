@@ -1,0 +1,17 @@
+&keymap {
+    NUM {
+        bindings = <
+&trans                                                                                                                                                                  &trans
+&kp GRAVE                &kp NUMBER_7  &kp NUMBER_8  &kp LG(LS(NUMBER_4))  &kp PLUS      &trans      &trans  &kp BACKSLASH    &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp SEMICOLON
+&kp SLASH                &kp NUMBER_4  &kp NUMBER_5  &kp NUMBER_6          &kp ASTERISK  &trans      &trans  &kp EXCLAMATION  &kp NUMBER_4  &kp NUMBER_5  &kp NUMBER_6  &kp SQT
+&mt LEFT_SHIFT NUMBER_0  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3          &kp PERIOD    &trans      &trans  &kp NUMBER_0     &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp EQUAL
+&trans                   &trans        &trans        &trans                &trans        &trans      &trans  &kp LEFT_SHIFT                               &trans        &trans
+        >;
+
+        sensor-bindings = <
+            &tab_slide
+            &scroll_up_down
+            &scroll_up_down
+        >;
+    };
+};
