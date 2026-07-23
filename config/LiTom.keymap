@@ -16,7 +16,6 @@
     };
 };
 
-#include "keymap/macros.dtsi"
 #include "keymap/sensors.dtsi"
 #include "keymap/layers/default.dtsi"
 #include "keymap/layers/mouse.dtsi"
