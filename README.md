@@ -27,8 +27,7 @@
 
 ## キーマップについて
 
-- ZMKstudio および DYAStudioにて確認・編集を行なってください
-  - https://zmk.studio/
+- DYAStudioにて確認・編集を行なってください
   - https://studio.dya.cormoran.works/
 
 - ZMK keymap-editor も使用できます
