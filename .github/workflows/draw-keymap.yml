@@ -1,0 +1,69 @@
+name: Draw LiTom keymap
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "config/*.keymap"
+      - "config/**/*.dtsi"
+      - "config/**/*.overlay"
+      - "scripts/prepare_keymap_for_drawing.py"
+      - ".github/workflows/draw-keymap.yml"
+
+concurrency:
+  group: draw-keymap-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  draw-keymap-svg:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout LiTom
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Checkout keymap SVG generator
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          repository: te9no/zmk-workspace
+          ref: b3e65177f7d8e4cc1685beb9dde887ac4634f67b
+          path: .keymap-svg-tools
+
+      - name: Prepare modular keymap
+        run: |
+          python3 scripts/prepare_keymap_for_drawing.py \
+            config/LiTom.keymap \
+            "${RUNNER_TEMP}/LiTom.keymap"
+
+      - name: Draw keymap SVG
+        run: |
+          mkdir -p keymap-svg
+          python3 .keymap-svg-tools/scripts/generate_physical_layout_svg.py \
+            config/boards/shields/LiTom/LiTom.dtsi \
+            keymap-svg/LiTom.svg \
+            --layout default_layout \
+            --keymap "${RUNNER_TEMP}/LiTom.keymap" \
+            --key-unit-px 84
+
+      - name: Commit updated SVG
+        env:
+          COMMIT_MESSAGE: "[Draw keymap-svg] ${{ github.event.head_commit.message || 'manual run' }}"
+        run: |
+          git add keymap-svg/LiTom.svg
+          if git diff --cached --quiet; then
+            echo "Keymap SVG is already up to date."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "${COMMIT_MESSAGE}"
+          git push
+
+      - name: Upload keymap SVG
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: keymap-svg
+          path: keymap-svg/LiTom.svg
+          if-no-files-found: error
