@@ -72,7 +72,7 @@
 
     scroll {
         layers = <2>;
-        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>, <&zip_xy_scaler 1 4>, <&zip_xy_to_scroll_mapper>, <&scroll_runtime_input_processor>;
+        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>, <&zip_xy_scaler 1 40>, <&zip_xy_to_scroll_mapper>, <&scroll_runtime_input_processor>;
     };
 };
 
