@@ -16,6 +16,53 @@
     temp-layer-deactivation-delay-ms = <400>;
 };
 
+// 慣性スクロール：スクロール層でボールを転がして離すと、だんだん遅くなりながら続く。
+// macOSのトラックパッドに合わせる：少しでも転がせば出る（しきい値は最小の1）。
+// 10msごとに出し、速さを10msごとに3%減らす（時定数約0.33秒。macOSのトラックパッドの0.5秒より短め）。
+// 速いときに出力を倍にする高速モードは、段差が大きくなるので切っている。
+// 強さはZMK Studioでも変えられる（Studioで保存した値がこちらより優先）。
+&scroll_runtime_input_processor {
+    inertia-enabled;
+    inertia-threshold = <1>;
+    inertia-interval-ms = <10>;
+    inertia-decay-percent = <3>;
+    inertia-fast-threshold = <0>;
+};
+
+// エンコーダのスクロール（&msc）にも慣性を付ける。トラックボールとは別の処理にして、
+// Studioでは "encoder" として別に調整できる。速さは変えない（1/1）。
+// 1クリックずつの操作では出ないように、しきい値は3（続けて素早く回したときだけ）。
+// 流れる量はトラックボールより控えめにする（10msごとに6%減、時定数約0.16秒）。
+/ {
+    encoder_runtime_input_processor: encoder_runtime_input_processor {
+        compatible = "zmk,input-processor-runtime";
+        processor-label = "encoder";
+        type = <INPUT_EV_REL>;
+        x-codes = <INPUT_REL_HWHEEL>;
+        y-codes = <INPUT_REL_WHEEL>;
+        scale-multiplier = <1>;
+        scale-divisor = <1>;
+        rotation-degrees = <0>;
+        track-remainders;
+
+        temp-layer-transparent-behavior = <&trans>;
+        temp-layer-kp-behavior = <&kp>;
+        temp-layer-keep-keycodes = <LEFT_CONTROL LEFT_SHIFT LEFT_ALT LEFT_GUI RIGHT_CONTROL RIGHT_SHIFT RIGHT_ALT RIGHT_GUI>;
+
+        inertia-enabled;
+        inertia-threshold = <3>;
+        inertia-interval-ms = <10>;
+        inertia-decay-percent = <6>;
+        inertia-fast-threshold = <0>;
+
+        #input-processor-cells = <0>;
+    };
+};
+
+&msc_input_listener {
+    input-processors = <&encoder_runtime_input_processor>;
+};
+
 #undef ZMK_POINTING_DEFAULT_SCRL_VAL
 #define ZMK_POINTING_DEFAULT_SCRL_VAL 80
 
